@@ -22,6 +22,7 @@ void *comer_hamburguesa(void *tid)
 			else
 			{
 				printf("SE TERMINARON LAS HAMBURGUESAS :( \n");
+				turno = (turno + 1) % NUMBER_OF_THREADS;
 				pthread_exit(NULL);
 			}
 		turno = (turno + 1) % NUMBER_OF_THREADS;
@@ -48,11 +49,6 @@ int main(int argc, char *argv[])
 	{
 		void *retval;
 		ret = pthread_join(threads[i], &retval);
-		if (ret != 0)
-		{
-			printf("Error en pthread_join: %d\n", ret);
-			exit(-1);
-		}
 	}
 
 	pthread_exit(NULL);
